@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Role extends Model
+{
+  use HasFactory;
+
+  protected $fillable = [
+    'name',
+  ];
+
+  public function sub_kriteria()
+  {
+    return $this->hasMany(SubKriteria::class);
+  }
+
+  public function alternatif()
+  {
+    return $this->hasMany(Alternatif::class);
+  }
+}
