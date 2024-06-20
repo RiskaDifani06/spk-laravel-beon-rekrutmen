@@ -14,7 +14,7 @@ class RoleController extends Controller
    */
   public function index()
   {
-    $roles = Role::query()->paginate(10);
+    $roles = Role::whereNull('deleted_at')->paginate(10);
     $title = 'Delete Role!';
     $text = 'Apakah anda yakin ingin menghapus data ini?';
     confirmDelete($title, $text, 'role.destroy');
@@ -101,7 +101,7 @@ class RoleController extends Controller
   public function destroy(Role $role)
   {
     try {
-      $role->delete();
+      $role->update(['deleted_at' =>now()]);
       Alert::success('Berhasil', 'Data berhasil dihapus');
       return redirect()->route('role.index');
     } catch (\Throwable $th) {
@@ -109,4 +109,21 @@ class RoleController extends Controller
       return redirect()->route('role.index');
     }
   }
+
+  public function restore($id)
+{
+    try {
+        $role = Role::withTrashed()->findOrFail($id);
+        $role->restore();
+
+        Alert::success('Berhasil', 'Data berhasil dikembalikan');
+        return redirect()->route('role.index');
+    } catch (\Throwable $th) {
+        Alert::error('Gagal', $th->getMessage());
+        return redirect()->back();
+    }
 }
+
+}
+
+

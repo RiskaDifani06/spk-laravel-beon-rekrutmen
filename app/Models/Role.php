@@ -9,8 +9,11 @@ class Role extends Model
 {
   use HasFactory;
 
+  protected $dates = ['deleted_at'];
+
   protected $fillable = [
     'name',
+    'deleted_at',
   ];
 
   public function sub_kriteria()

@@ -101,14 +101,26 @@ class BordaController extends Controller
   }
 
   public function exportBorda($role_id)
-  {
+{
     $borda = Borda::join('alternatif', 'borda.alternatif_id', '=', 'alternatif.id')
       ->join('roles', 'alternatif.role_id', '=', 'roles.id')
       ->select('borda.*', 'alternatif.nama as alternatif_name', 'roles.name as role_name', 'roles.id as role_id')
       ->where('roles.id', $role_id)
       ->orderBy('score', 'desc')
       ->get();
+
     $pdf = FacadePdf::loadView('borda.export', compact('borda'));
-    return $pdf->download('borda.pdf');
-  }
+
+    // Dapatkan nama role
+    $role_name = $borda->first()->role_name;
+
+    // Format tanggal saat ini
+    $date = date('Ymd');
+
+    // Format nama file
+    $fileName = "{$role_name}_{$date}.pdf";
+
+    return $pdf->download($fileName);
+}
+
 }

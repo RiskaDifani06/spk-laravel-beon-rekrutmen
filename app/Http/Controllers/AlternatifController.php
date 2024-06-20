@@ -26,7 +26,7 @@ class AlternatifController extends Controller
    */
   public function create()
   {
-    $roles = Role::all();
+    $roles = Role::whereNull('deleted_at')->get();
     return view('alternatif.create', compact('roles'));
   }
 
@@ -62,7 +62,7 @@ class AlternatifController extends Controller
    */
   public function edit(Alternatif $alternatif)
   {
-    $roles = Role::all();
+    $roles = Role::whereNull('deleted_at')->get();
     return view('alternatif.edit', compact('alternatif', 'roles'));
   }
 

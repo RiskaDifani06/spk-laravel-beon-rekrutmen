@@ -84,4 +84,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
   Route::get('/role/{role}/edit', [RoleController::class, 'edit'])->name('role.edit');
   Route::put('/role/{role}', [RoleController::class, 'update'])->name('role.update');
   Route::delete('/role/{role}', [RoleController::class, 'destroy'])->name('role.destroy');
+  // Route::post('/role/restore/{id}', [RoleController::class, 'restore'])->name('role.restore');
+
 });

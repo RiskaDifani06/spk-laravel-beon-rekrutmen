@@ -88,8 +88,7 @@
       </div>
       <p style="font-size: 16px">
         Sistem Pendukung Keputusan (SPK) Beon adalah aplikasi yang dibuat untuk membantu pengambilan keputusan
-        dalam
-        pemilihan karyawan yang akan diberikan bonus.
+        dalam rekruitmen karywan baru di PT Beon Intermedia.
       </p>
     </div>
   </div>
