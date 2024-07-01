@@ -38,11 +38,11 @@ class BordaController extends Controller
 
   public function calculateBorda()
   {
-    // Fetch all distinct roles
+    // Ambil semua role yang berbeda
     $roles = Alternatif::distinct('role_id')->pluck('role_id');
 
     foreach ($roles as $roleId) {
-      // Fetch all HasilPenilaian records for the current role
+      // Ambil semua catatan HasilPenilaian untuk peran saat ini
       $hasilPenilaian = HasilPenilaian::whereHas('alternatif', function ($query) use ($roleId) {
         $query->where('role_id', $roleId);
       })->get();
